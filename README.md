@@ -1,5 +1,7 @@
 # WINC1500 Rust
 
+No-op
+
 [![crate](https://img.shields.io/crates/v/wincwifi.svg)](https://crates.io/crates/wincwifi)
 [![documentation](https://docs.rs/wincwifi/badge.svg)](https://docs.rs/wincwifi/)
 [![Build](https://github.com/kaidokert/winc-rs/actions/workflows/rust.yaml/badge.svg)](https://github.com/kaidokert/winc-rs/actions/workflows/rust.yaml)
