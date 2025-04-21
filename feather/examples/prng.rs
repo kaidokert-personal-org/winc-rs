@@ -39,12 +39,20 @@ fn program() -> Result<(), StackError> {
         nb::block!(stack.get_random_bytes(&mut random_bytes))?;
         defmt::info!("Got the Random bytes: {}", random_bytes);
 
+        let mut counter = 0;
         loop {
             delay_ms(200);
             red_led.set_high().unwrap();
             delay_ms(200);
             red_led.set_low().unwrap();
             stack.heartbeat().unwrap();
+            counter += 1;
+            if counter > 10 {
+                let mut random_bytes: [u8; 32] = [0; 32];
+                nb::block!(stack.get_random_bytes(&mut random_bytes))?;
+                defmt::info!("Got the Random bytes: {}", random_bytes);
+                counter = 0;
+            }
         }
     }
     Ok(())
