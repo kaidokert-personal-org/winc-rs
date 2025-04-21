@@ -8,7 +8,7 @@ use demos::iperf3_client::{iperf3_client, Conf, TestConfig};
 use demos::{
     coap_client::coap_client, http_client::http_client, http_server::http_server,
     tcp_server::tcp_server, telnet_shell::telnet_shell, udp_client::udp_client,
-    udp_server::udp_server,
+    udp_server::udp_server, udp_streamer::udp_streamer,
 };
 
 use log::Level;
@@ -42,6 +42,7 @@ enum Mode {
     HttpServer,
     Iperf3Client(Iperf3Config), // Embed the config directly in the mode
     TelnetServer,
+    UdpStreamer,
 }
 
 #[derive(Parser, Clone, Debug)]
@@ -137,6 +138,9 @@ fn main() -> Result<(), LocalErrors> {
         }
         Mode::HttpServer => {
             http_server(&mut stack, port).map_err(|_| LocalErrors::IoError)?;
+        }
+        Mode::UdpStreamer => {
+            udp_streamer(&mut stack, ip_addr, port).map_err(|_| LocalErrors::IoError)?;
         }
         Mode::Iperf3Client(_config) => {
             #[cfg(feature = "iperf3")]

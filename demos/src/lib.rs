@@ -16,6 +16,7 @@ pub mod tcp_server;
 pub mod telnet_shell;
 pub mod udp_client;
 pub mod udp_server;
+pub mod udp_streamer;
 
 #[allow(dead_code)]
 #[derive(Debug)]
